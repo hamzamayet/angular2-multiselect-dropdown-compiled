@@ -77,7 +77,7 @@ var AngularMultiSelect = /** @class */ (function () {
         }
         if (changes.settings && !changes.settings.firstChange) {
             this.settings = Object.assign(this.defaultSettings, this.settings);
-            console.log(this.settings);
+            //console.log(this.settings);
         }
     };
     AngularMultiSelect.prototype.ngDoCheck = function () {
@@ -109,8 +109,10 @@ var AngularMultiSelect = /** @class */ (function () {
             }
         }
         else {
-            this.removeSelected(item);
-            this.onDeSelect.emit(item);
+			if (!this.settings.singleSelection) {
+				this.removeSelected(item);
+				this.onDeSelect.emit(item);
+			}            
         }
         if (this.isSelectAll || this.data.length > this.selectedItems.length) {
             this.isSelectAll = false;
@@ -264,7 +266,7 @@ var AngularMultiSelect = /** @class */ (function () {
             this.chunkIndex.push((i * this.itemHeight) + 'px');
             this.chunkArray.push(this.data[i]);
         }
-        console.log(this.chunkArray);
+        //console.log(this.chunkArray);
     };
     AngularMultiSelect.prototype.onScroll = function (e) {
         this.scrollTop = e.target.scrollTop;
